@@ -1,5 +1,6 @@
 package praktikum.order;
 
+import io.qameta.allure.Allure;
 import io.qameta.allure.junit4.DisplayName;
 import io.restassured.response.ValidatableResponse;
 import org.junit.Test;
@@ -18,7 +19,7 @@ public class CreateOrderTest {
         this.color = color;
     }
 
-    @Parameterized.Parameters
+    @Parameterized.Parameters(name = "color as {0}")
     public static Object[][] orderData() {
         return new Object[][] {
                 {new String[]{"BLACK"}},
@@ -31,6 +32,7 @@ public class CreateOrderTest {
     @Test
     @DisplayName("Создание заказа с разными цветами")
     public void orderTest() {
+        Allure.parameter("color", color);
         // Сгенерировали данные для рандомного заказа
         OrderCredentials orderCredentials = OrderCredentials.random();
         // Изменили color на данные из двойного массива
